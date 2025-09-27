@@ -22,17 +22,21 @@ export default function Login() {
   });
 
   const onSubmit = async (data: LoginSchemaType) => {
-    const res: any = await signIn("credentials", {
-      ...data,
-      redirect: false,
-    });
+    try {
+      const res = await signIn("credentials", {
+        ...data,
+        redirect: false,
+      });
 
-    if (res && !res?.error) {
-      toast.success("Inicio de sesión exitoso");
-      router.push("/home");
-      reset();
-    } else {
-      toast.error("Datos incorrectos, intente nuevamente");
+      if (res?.ok && !res?.error) {
+        toast.success("Inicio de sesión exitoso");
+        router.push("/home");
+        reset();
+      } else {
+        toast.error(res?.error || "Error al iniciar sesión");
+      }
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Error de conexión");
     }
   };
 
