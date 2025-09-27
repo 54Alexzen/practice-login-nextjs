@@ -46,9 +46,9 @@ export default function Login() {
     <main className="flex justify-center items-center min-h-[90svh] w-full">
       <div className="absolute inset-0 -z-10 background" />
       <section className="container mx-auto flex flex-col justify-center items-center">
-        <h1 className="text-4xl font-bold uppercase">Iniciar Sesión</h1>
-        <p className="max-w-sm text-center mt-3">
-          Si ya tienes una cuenta, inicia sesión con tus credenciales.
+        <h1 className="sm:text-4xl text-3xl font-bold uppercase">Bienvenido</h1>
+        <p className="max-w-md text-center sm:text-sm text-xs text-stone-500 my-3">
+          Si ya cuentas con una cuenta, inicia sesión. De lo contrario, regístrate en la parte inferior.
         </p>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -57,7 +57,7 @@ export default function Login() {
           <Input
             id="email"
             type="email"
-            placeholder="correo@example.com"
+            placeholder="Ingresa tu correo electrónico"
             label="Correo Electrónico"
             {...register("email")}
             error={errors.email?.message}
@@ -65,7 +65,7 @@ export default function Login() {
           <Input
             id="password"
             type="password"
-            placeholder="********"
+            placeholder="Ingresa tu contraseña"
             label="Contraseña"
             {...register("password")}
             error={errors.password?.message}
@@ -73,7 +73,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={!isValid || isSubmitting}
-            className="w-full bg-stone-800 text-white rounded-full sm:py-2.5 py-2 disabled:opacity-100 mt-10 uppercase font-semibold sm:text-sm text-xs flex justify-center items-center gap-2"
+            className="w-full bg-stone-800 text-white rounded-full sm:py-2.5 py-2 mt-10 uppercase font-semibold sm:text-sm text-xs flex justify-center items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSubmitting ? (
               <>
