@@ -25,17 +25,16 @@ export async function POST(req: Request) {
       );
     }
 
-    // const hashedPassword = await hashPassword(password);
+    const hashedPassword = await hashPassword(password);
 
     const stmt = db.prepare(
       "INSERT INTO users (email, name, password) VALUES (?, ?, ?)"
     );
 
-    const result = stmt.run(email, name, password);
+    const result = stmt.run(email, name, hashedPassword);
     console.log("✅ User created successfully:", {
       email,
       name,
-      password,
       id: result.lastInsertRowid,
     });
 
