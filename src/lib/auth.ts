@@ -16,7 +16,7 @@ export const authOptions: NextAuthOptions = {
 
         const user = db
           .prepare(
-            "SELECT id, email, password, name, image FROM users WHERE email = ?"
+            "SELECT id, email, password, name FROM users WHERE email = ?"
           )
           .get(credentials.email) as
           | {
