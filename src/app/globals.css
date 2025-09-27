@@ -1,13 +1,6 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #2c2c2c;
-}
-
 @theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --breakpoint-xs: 30rem;
   --breakpoint-2xs: 20rem;
 
@@ -15,7 +8,40 @@
   --text-2xs--line-height: calc(0.75 / 0.625);
 }
 
+@utility background {
+  background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 20px,
+      rgba(75, 85, 99, 0.08) 20px,
+      rgba(75, 85, 99, 0.08) 21px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 30px,
+      rgba(107, 114, 128, 0.06) 30px,
+      rgba(107, 114, 128, 0.06) 31px
+    ),
+    repeating-linear-gradient(
+      60deg,
+      transparent,
+      transparent 40px,
+      rgba(55, 65, 81, 0.05) 40px,
+      rgba(55, 65, 81, 0.05) 41px
+    ),
+    repeating-linear-gradient(
+      150deg,
+      transparent,
+      transparent 35px,
+      rgba(31, 41, 55, 0.04) 35px,
+      rgba(31, 41, 55, 0.04) 36px
+    );
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
+  height: 100vh;
+  margin: 0;
 }
