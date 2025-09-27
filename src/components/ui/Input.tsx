@@ -17,7 +17,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <div className="flex flex-col gap-1 relative mt-5 w-full">
         <label
           htmlFor={props.id}
-          className="sm:text-base text-sm font-semibold"
+          className="md:text-base sm:text-sm text-xs font-semibold"
         >
           {label}
         </label>
@@ -25,7 +25,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <input
             ref={ref}
             type={inputType}
-            className={`border border-stone-300 bg-stone-100 px-4 py-2.5 w-full sm:text-sm text-xs rounded-full`}
+            className={`border border-stone-300 bg-stone-100 px-4 py-2.5 w-full md:text-sm sm:text-xs text-2xs rounded-full`}
             {...props}
           />
           {type === "password" && (
@@ -35,15 +35,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               className="absolute right-4 top-1/2 transform -translate-y-1/2 text-stone-500 hover:text-stone-700 transition-all duration-200 cursor-pointer"
             >
               {showPassword ? (
-                <EyeOff className="size-4" />
+                <EyeOff className="sm:size-4 size-3.5" />
               ) : (
-                <Eye className="size-4" />
+                <Eye className="sm:size-4 size-3.5" />
               )}
             </button>
           )}
         </div>
         {error && (
-          <p className="text-red-500 sm:text-xs tex2x absolute -bottom-4">
+          <p className="text-red-500 md:text-xs text-2xs absolute -bottom-4">
             *{error}
           </p>
         )}
