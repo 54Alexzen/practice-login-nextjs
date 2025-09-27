@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #2c2c2c;
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --breakpoint-xs: 30rem;
+  --breakpoint-2xs: 20rem;
+
+  --text-2xs: 0.625rem;
+  --text-2xs--line-height: calc(0.75 / 0.625);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
