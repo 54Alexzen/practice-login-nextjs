@@ -38,7 +38,7 @@ export const authOptions: NextAuthOptions = {
           user.password
         );
         if (!isValid) {
-          throw new Error("INVALID_CREDENTIALS");
+          throw new Error("CredentialsSignin");
         }
 
         return {
