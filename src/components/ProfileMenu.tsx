@@ -6,13 +6,17 @@ import Link from "next/link";
 import { User } from "lucide-react";
 
 interface ProfileMenuProps {
-  user?: { name: string; email: string } | null;
+  user: { 
+    name?: string | null; 
+    email?: string | null; 
+    image?: string | null;
+  };
 }
 
 export const ProfileMenu = ({ user }: ProfileMenuProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const firstLatter = user?.name.charAt(0) || "U";
+  const firstLatter = user?.name?.charAt(0) || "U";
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -45,9 +49,9 @@ export const ProfileMenu = ({ user }: ProfileMenuProps) => {
         >
           <div className="flex flex-col items-center gap-1 bg-stone-100 p-4 rounded-md">
             <p className="md:text-sm sm:text-xs text-2xs font-semibold">
-              {user?.name}
+              {user?.name || "Usuario"}
             </p>
-            <p className="md:text-xs text-2xs">{user?.email}</p>
+            <p className="md:text-xs text-2xs">{user?.email || "Sin correo"}</p>
           </div>
 
           <div className="mt-4 flex flex-col gap-1">

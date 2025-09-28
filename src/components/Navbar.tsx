@@ -53,8 +53,8 @@ export default async function Navbar() {
           </div>
         )}
 
-        {session && (
-         <ProfileMenu user={session?.user} />
+        {session?.user && (
+         <ProfileMenu user={session.user} />
         )}
       </nav>
     </header>
