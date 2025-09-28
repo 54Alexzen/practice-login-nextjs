@@ -9,7 +9,16 @@ export async function POST(req: Request) {
     const parsed = registerSchema.safeParse(body);
 
     if (!parsed.success) {
-      return NextResponse.json({ error: "Datos inválidos" }, { status: 400 });
+      const errors = parsed.error.issues
+        .map((issue) => issue.message)
+        .join(", ");
+      return NextResponse.json(
+        {
+          error: "VALIDATION_ERROR",
+          message: `Datos inválidos: ${errors}`,
+        },
+        { status: 400 }
+      );
     }
 
     const { email, name, password } = parsed.data;
@@ -20,8 +29,12 @@ export async function POST(req: Request) {
 
     if (existingUser) {
       return NextResponse.json(
-        { error: "El correo ya está en uso" },
-        { status: 400 }
+        {
+          error: "EMAIL_ALREADY_EXISTS",
+          message:
+            "Ya existe una cuenta con este correo electrónico. Intenta iniciar sesión.",
+        },
+        { status: 409 }
       );
     }
 
@@ -32,11 +45,6 @@ export async function POST(req: Request) {
     );
 
     const result = stmt.run(email, name, hashedPassword);
-    console.log("✅ User created successfully:", {
-      email,
-      name,
-      id: result.lastInsertRowid,
-    });
 
     return NextResponse.json({
       success: true,
@@ -44,17 +52,27 @@ export async function POST(req: Request) {
       user: { id: result.lastInsertRowid, email, name },
     });
   } catch (error: unknown) {
+    console.error("Error creating user:", error);
+
     if (
       error instanceof Error &&
-      error.message === "SQLITE_CONSTRAINT_UNIQUE"
+      (error.message.includes("UNIQUE constraint failed") ||
+        error.message === "SQLITE_CONSTRAINT_UNIQUE")
     ) {
       return NextResponse.json(
-        { error: "El correo ya está en uso" },
-        { status: 400 }
+        {
+          error: "EMAIL_ALREADY_EXISTS",
+          message: "Ya existe una cuenta con este correo electrónico.",
+        },
+        { status: 409 }
       );
     }
+
     return NextResponse.json(
-      { error: "Error interno del servidor" },
+      {
+        error: "SERVER_ERROR",
+        message: "Error interno del servidor. Inténtalo más tarde.",
+      },
       { status: 500 }
     );
   }
