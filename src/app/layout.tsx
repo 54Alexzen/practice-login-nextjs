@@ -14,8 +14,13 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Proyecto de carrera",
+  title: "Proyecto de carrera - Ulises Jiménez",
   description: "Proyecto de carrera de Ulises (login)",
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({
