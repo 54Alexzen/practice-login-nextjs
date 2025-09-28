@@ -38,6 +38,7 @@
       rgba(31, 41, 55, 0.04) 36px
     );
 }
+
 body {
   display: grid;
   grid-template-rows: 1fr 2fr 1fr;
