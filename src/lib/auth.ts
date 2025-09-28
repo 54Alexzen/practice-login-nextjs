@@ -12,7 +12,9 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials.password) return null;
+        if (!credentials?.email || !credentials.password) {
+          throw new Error("EMAIL_AND_PASSWORD_REQUIRED");
+        }
 
         const user = db
           .prepare(
@@ -27,13 +29,17 @@ export const authOptions: NextAuthOptions = {
             }
           | undefined;
 
-        if (!user) return null;
+        if (!user) {
+          throw new Error("USER_NOT_FOUND");
+        }
 
         const isValid = await comparePassword(
           credentials.password,
           user.password
         );
-        if (!isValid) return null;
+        if (!isValid) {
+          throw new Error("INVALID_CREDENTIALS");
+        }
 
         return {
           id: String(user.id),
