@@ -1,5 +1,9 @@
+import { getServerSession } from "next-auth";
 import { FacebookIcon } from "./icons/FacebookIcon";
 import { InstagramIcon } from "./icons/InstagramIcon";
+import { Logo } from "./icons/Logo";
+import { authOptions } from "@/lib/auth";
+import { ProfileMenu } from "./ProfileMenu";
 
 const socialLinks = [
   {
@@ -14,32 +18,44 @@ const socialLinks = [
   },
 ];
 
-export default function Navbar() {
+export default async function Navbar() {
+  const session = await getServerSession(authOptions);
   return (
     <header className="fixed w-full top-0 left-0 z-20 border-b border-b-stone-200 bg-stone-50/50 backdrop-blur-sm">
       <nav className="container mx-auto flex justify-between items-center py-2.5 md:px-6 sm:px-5 px-4">
-        <div>
-          <p className="md:text-sm sm:text-xs text-2xs font-semibold">
-            Ulises Jimenez Cruz
-          </p>
-          <p className="md:text-xs text-2xs text-stone-500">
-            Desarrollador Frontend
-          </p>
+        <div className="flex items-center gap-2">
+          <Logo className="md:size-10 sm:size-9 size-8" />
+          {!session && (
+            <div>
+              <p className="md:text-sm sm:text-xs text-2xs font-semibold">
+                Ulises Jimenez Cruz
+              </p>
+              <p className="md:text-xs text-2xs text-stone-500">
+                Desarrollador Frontend
+              </p>
+            </div>
+          )}
         </div>
-        <div className="flex items-center gap-1.5">
-          {socialLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border border-stone-800 hover:bg-stone-800 hover:text-white transition-colors duration-300 rounded-full p-1"
-              aria-label={`Visitar ${link.name}`}
-            >
-              {link.icon}
-            </a>
-          ))}
-        </div>
+        {!session && (
+          <div className="flex items-center gap-1.5">
+            {socialLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-stone-800 hover:bg-stone-800 hover:text-white transition-colors duration-300 rounded-full p-1"
+                aria-label={`Visitar ${link.name}`}
+              >
+                {link.icon}
+              </a>
+            ))}
+          </div>
+        )}
+
+        {session && (
+         <ProfileMenu user={session?.user} />
+        )}
       </nav>
     </header>
   );

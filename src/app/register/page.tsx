@@ -1,5 +1,6 @@
 "use client";
 
+import { Divider } from "@/components/ui/Divider";
 import { Input } from "@/components/ui/Input";
 import { registerSchema, RegisterSchemaType } from "@/lib/validations";
 import { getErrorMessage } from "@/utils/errorMessage";
@@ -109,11 +110,7 @@ export default function RegisterPage() {
           </button>
         </form>
         <div>
-          <div className="flex items-center my-4 md:text-base sm:text-sm text-xs">
-            <div className="flex-grow border-t border-gray-300"></div>
-            <span className="mx-4 text-stone-500">O</span>
-            <div className="flex-grow border-t border-gray-300"></div>
-          </div>
+          <Divider text="O" className="my-4 md:text-base sm:text-sm text-xs" />
 
           <div className="flex justify-center items-center gap-2 md:text-sm sm:text-xs text-2xs">
             <p>¿Ya tienes una cuenta?</p>
