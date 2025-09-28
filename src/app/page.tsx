@@ -2,6 +2,7 @@
 
 import { Input } from "@/components/ui/Input";
 import { loginSchema, LoginSchemaType } from "@/lib/validations";
+import { getErrorMessage } from "@/utils/errorMessage";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader, Send } from "lucide-react";
 import { signIn } from "next-auth/react";
@@ -12,13 +13,12 @@ import { toast } from "sonner";
 
 export default function Login() {
   const router = useRouter();
-
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isValid, isSubmitting },
-  } = useForm({
+    formState: { errors, isSubmitting, isValid },
+  } = useForm<LoginSchemaType>({
     resolver: zodResolver(loginSchema),
     mode: "onChange",
   });
@@ -31,14 +31,18 @@ export default function Login() {
       });
 
       if (res?.ok && !res?.error) {
-        toast.success("Inicio de sesión exitoso");
+        toast.success("¡Bienvenido! Inicio de sesión exitoso.");
         router.push("/home");
         reset();
       } else {
-        toast.error(res?.error || "Error al iniciar sesión");
+        toast.error(getErrorMessage(res?.error || "UNKNOWN_ERROR"));
       }
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Error de conexión");
+      if (error instanceof Error) {
+        toast.error(getErrorMessage(error.message));
+      } else {
+        toast.error(getErrorMessage("UNKNOWN_ERROR"));
+      }
     }
   };
 
@@ -91,14 +95,14 @@ export default function Login() {
             )}
           </button>
         </form>
-        
+
         <div>
           <div className="flex items-center my-4 md:text-base sm:text-sm text-xs">
             <div className="flex-grow border-t border-gray-300"></div>
             <span className="mx-4 text-stone-500">O</span>
             <div className="flex-grow border-t border-gray-300"></div>
           </div>
-          
+
           <div className="flex justify-center items-center gap-2 md:text-sm sm:text-xs text-2xs">
             <p>¿No tienes una cuenta?</p>
             <Link href="/register" className="underline font-semibold">
