@@ -80,7 +80,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={!isValid || isSubmitting}
-            className="w-full bg-stone-800 text-white rounded-full py-2.5 mt-10 uppercase font-semibold md:text-sm sm:text-xs text-2xs flex justify-center items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full bg-stone-800 text-white rounded-full py-2.5 mt-10 uppercase font-semibold md:text-sm sm:text-xs text-2xs flex justify-center items-center gap-2 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSubmitting ? (
               <>

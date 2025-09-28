@@ -5,6 +5,7 @@ import { registerSchema, RegisterSchemaType } from "@/lib/validations";
 import { getErrorMessage } from "@/utils/errorMessage";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader, Send } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -68,6 +69,7 @@ export default function RegisterPage() {
             type="text"
             placeholder="Tu nombre"
             label="Nombre"
+            maxLength={100}
             {...register("name")}
             error={errors.name?.message}
           />
@@ -84,13 +86,14 @@ export default function RegisterPage() {
             type="password"
             placeholder="********"
             label="Contraseña"
+            maxLength={51}
             {...register("password")}
             error={errors.password?.message}
           />
           <button
             type="submit"
             disabled={!isValid || isSubmitting}
-            className="w-full bg-stone-800 text-white rounded-full py-2.5 mt-10 uppercase font-semibold md:text-sm sm:text-xs text-2xs flex justify-center items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full bg-stone-800 text-white rounded-full py-2.5 mt-10 uppercase font-semibold md:text-sm sm:text-xs text-2xs flex justify-center items-center gap-2 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSubmitting ? (
               <>
@@ -105,6 +108,20 @@ export default function RegisterPage() {
             )}
           </button>
         </form>
+        <div>
+          <div className="flex items-center my-4 md:text-base sm:text-sm text-xs">
+            <div className="flex-grow border-t border-gray-300"></div>
+            <span className="mx-4 text-stone-500">O</span>
+            <div className="flex-grow border-t border-gray-300"></div>
+          </div>
+
+          <div className="flex justify-center items-center gap-2 md:text-sm sm:text-xs text-2xs">
+            <p>¿Ya tienes una cuenta?</p>
+            <Link href="/" className="underline font-semibold">
+              Inicia sesión
+            </Link>
+          </div>
+        </div>
       </section>
     </main>
   );
