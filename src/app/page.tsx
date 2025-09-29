@@ -1,5 +1,6 @@
 "use client";
 
+import { ParticlesBackground } from "@/components/ParticlesBackground";
 import { Divider } from "@/components/ui/Divider";
 import { Input } from "@/components/ui/Input";
 import { loginSchema, LoginSchemaType } from "@/lib/validations";
@@ -49,7 +50,14 @@ export default function Login() {
 
   return (
     <main className="flex justify-center items-center min-h-[90svh] w-full">
-      <div className="absolute inset-0 -z-10 background" />
+      <ParticlesBackground
+        particleColor="#292524"
+        lineColor="#292524"
+        particleSize={2}
+        speed={0.3}
+        maxDistance={120}
+        particleCount={80}
+      />
       <section className="container mx-auto flex flex-col justify-center items-center md:px-6 sm:px-5 px-4">
         <h1 className="md:text-4xl sm:text-3xl text-2xl font-bold uppercase">
           Bienvenido
