@@ -1,4 +1,4 @@
-export const Logo = (props: React.SVGProps<SVGSVGElement>) => (
+const Logo = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 491 318" fill="none" {...props}>
     <mask width="318" height="318">
       <path d="M0 0H317.333V317.229H0V0Z" fill="white" />
@@ -19,4 +19,14 @@ export const Logo = (props: React.SVGProps<SVGSVGElement>) => (
       />
     </g>
   </svg>
+);
+
+export const Logotipo = () => (
+  <div className="flex items-center gap-2">
+    <Logo className="md:size-10 sm:size-9 size-8" />
+    <div>
+      <p className="md:text-sm sm:text-xs text-2xs font-semibold">Frendly</p>
+      <p className="md:text-xs text-2xs text-stone-500">Comparte el instante</p>
+    </div>
+  </div>
 );

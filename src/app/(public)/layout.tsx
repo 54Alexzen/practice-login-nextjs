@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 import { Toaster } from "sonner";
-import AuthProvider from "@/components/AuthProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
@@ -15,12 +14,13 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Frendly - Comparte el instante",
-  description: "Red social para compartir momentos con amigos y familiares de forma sencilla y divertida.",
+  description:
+    "Red social para compartir momentos con amigos y familiares de forma sencilla y divertida.",
   icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
-  manifest: '/site.webmanifest',
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({
@@ -30,12 +30,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${poppins.variable} ${poppins.className} antialiased text-stone-800 bg-stone-50`}>
-        <AuthProvider>
-          <Navbar />
-          {children}
-          <Toaster position="top-center" richColors/>
-        </AuthProvider>
+      <body
+        className={`${poppins.variable} ${poppins.className} antialiased text-stone-800 bg-stone-50`}
+      >
+        <Navbar />
+        {children}
+        <Toaster position="top-center" richColors />
         <Footer />
       </body>
     </html>

@@ -14,7 +14,7 @@ export default async function Login() {
   }
 
   return (
-    <main className="flex justify-center items-center min-h-[90svh] w-full">
+    <main className="flex justify-center items-center w-full">
       <ParticlesBackground
         particleColor="#292524"
         lineColor="#292524"

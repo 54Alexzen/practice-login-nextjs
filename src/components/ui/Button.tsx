@@ -1,17 +1,23 @@
+import Link from "next/link";
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
   variant?: "default" | "form" | "icon" | "menu";
   className?: string;
+  component?: "button" | "link";
+  href?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({
   children,
   onClick,
   disabled,
-  variant = "form",
+  variant = "default",
   className = "",
+  component = "button",
+  href = "#",
 }: ButtonProps) => {
   const variants = {
     default: "",
@@ -23,8 +29,16 @@ export const Button: React.FC<ButtonProps> = ({
   const styles = `${variants} ${className}`;
 
   return (
-    <button onClick={onClick} disabled={disabled} className={styles}>
-      {children}
-    </button>
+    <>
+      {component === "button" ? (
+        <button onClick={onClick} disabled={disabled} className={styles}>
+          {children}
+        </button>
+      ) : (
+        <Link href={href} className={styles}>
+          {children}
+        </Link>
+      )}
+    </>
   );
 };
