@@ -14,8 +14,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Proyecto de carrera - Ulises Jiménez",
-  description: "Proyecto de carrera de Ulises (login)",
+  title: "Frendly - Comparte el instante",
+  description: "Red social para compartir momentos con amigos y familiares de forma sencilla y divertida.",
   icons: {
     icon: '/favicon.ico',
     apple: '/apple-touch-icon.png',

@@ -1,41 +1,43 @@
 "use client";
-
+import { registerSchema, RegisterSchemaType } from "@/lib/validations";
+import { getErrorMessage } from "@/utils/errorMessage";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader, Send } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Input } from "../ui/Input";
-import { getErrorMessage } from "@/utils/errorMessage";
-import { Loader, Send } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema, LoginSchemaType } from "@/lib/validations";
-import { signIn } from "next-auth/react";
 import { Button } from "../ui/Button";
-import { useRouter } from "next/navigation";
 
-export const LoginForm = () => {
+export const RegisterForm = () => {
   const router = useRouter();
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting, isValid },
-  } = useForm<LoginSchemaType>({
-    resolver: zodResolver(loginSchema),
+  } = useForm<RegisterSchemaType>({
+    resolver: zodResolver(registerSchema),
     mode: "onChange",
   });
 
-  const onSubmit = async (data: LoginSchemaType) => {
+  const onSubmit = async (data: RegisterSchemaType) => {
     try {
-      const res = await signIn("credentials", {
-        ...data,
-        redirect: false,
+      const res = await fetch("/api/users/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
 
-      if (res?.ok && !res?.error) {
-        toast.success("¡Bienvenido! Inicio de sesión exitoso.");
-        router.push("/home");
+      if (res.ok) {
+        toast.success(
+          "¡Cuenta creada exitosamente!. Ya puedes iniciar sesión."
+        );
         reset();
+        router.push("/");
       } else {
-        toast.error(getErrorMessage(res?.error || "UNKNOWN_ERROR"));
+        const errorData = await res.json();
+        toast.error(getErrorMessage(errorData.error || "UNKNOWN_ERROR"));
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -51,18 +53,28 @@ export const LoginForm = () => {
       className="flex flex-col w-full max-w-md"
     >
       <Input
+        id="name"
+        type="text"
+        placeholder="Tu nombre"
+        label="Nombre"
+        maxLength={100}
+        {...register("name")}
+        error={errors.name?.message}
+      />
+      <Input
         id="email"
         type="email"
-        placeholder="Ingresa tu correo electrónico"
-        label="Correo Electrónico"
+        placeholder="correo@example.com"
+        label="Email"
         {...register("email")}
         error={errors.email?.message}
       />
       <Input
         id="password"
         type="password"
-        placeholder="Ingresa tu contraseña"
+        placeholder="********"
         label="Contraseña"
+        maxLength={51}
         {...register("password")}
         error={errors.password?.message}
       />
@@ -70,12 +82,12 @@ export const LoginForm = () => {
         {isSubmitting ? (
           <>
             <Loader className="animate-spin md:size-4 size-3.5" />
-            <span>Iniciando sesión</span>
+            <span>Creando cuenta</span>
           </>
         ) : (
           <>
             <Send className="md:size-4 size-3.5" />
-            <span>Iniciar Sesión</span>
+            <span>Crear cuenta</span>
           </>
         )}
       </Button>

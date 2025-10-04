@@ -27,16 +27,14 @@ export default function Navbar() {
       <nav className="container mx-auto flex justify-between items-center py-2.5 md:px-6 sm:px-5 px-4">
         <div className="flex items-center gap-2">
           <Logo className="md:size-10 sm:size-9 size-8" />
-          {!session && status !== "loading" && (
-            <div>
+          <div>
               <p className="md:text-sm sm:text-xs text-2xs font-semibold">
-                Ulises Jimenez Cruz
+                Frendly
               </p>
               <p className="md:text-xs text-2xs text-stone-500">
-                Desarrollador Frontend
+                Comparte el instante
               </p>
             </div>
-          )}
         </div>
         
         {!session && status !== "loading" && (
