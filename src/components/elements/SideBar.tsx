@@ -1,5 +1,5 @@
 "use client";
-import { Home, User } from "lucide-react";
+import { Home, Settings, User } from "lucide-react";
 import { Button } from "../ui/Button";
 import { LogoutButton } from "./LogoutButton";
 import { usePathname } from "next/navigation";
@@ -14,6 +14,11 @@ const options = [
     icon: <User className="md:size-5 size-4" />,
     label: "Perfil",
     href: "/profile",
+  },
+  {
+    icon: <Settings className="md:size-5 size-4" />,
+    label: "Configuración",
+    href: "/settings",
   },
 ];
 export const SideBar = () => {
