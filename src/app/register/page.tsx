@@ -1,6 +1,6 @@
 "use client";
 
-import { ParticlesBackground } from "@/components/ParticlesBackground";
+import { ParticlesBackground } from "@/components/elements/ParticlesBackground";
 import { Divider } from "@/components/ui/Divider";
 import { Input } from "@/components/ui/Input";
 import { registerSchema, RegisterSchemaType } from "@/lib/validations";

@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { LogoutButton } from "./LogoutButton";
 import Link from "next/link";
 import { User } from "lucide-react";
+import { LogoutButton } from "./LogoutButton";
 
 interface ProfileMenuProps {
   user: { 

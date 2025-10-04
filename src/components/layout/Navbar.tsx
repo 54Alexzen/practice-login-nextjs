@@ -1,10 +1,10 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { FacebookIcon } from "./icons/FacebookIcon";
-import { InstagramIcon } from "./icons/InstagramIcon";
-import { Logo } from "./icons/Logo";
-import { ProfileMenu } from "./ProfileMenu";
+import { FacebookIcon } from "../icons/FacebookIcon";
+import { InstagramIcon } from "../icons/InstagramIcon";
+import { Logo } from "../icons/Logo";
+import { ProfileMenu } from "../elements/ProfileMenu";
 
 const socialLinks = [
   {
