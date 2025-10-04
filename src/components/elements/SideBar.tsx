@@ -1,35 +1,31 @@
 "use client";
 import { Home, User } from "lucide-react";
 import { Button } from "../ui/Button";
-import { usePathname } from "next/navigation";
 import { LogoutButton } from "./LogoutButton";
+import { usePathname } from "next/navigation";
 
 const options = [
   {
-    icon: <Home className="size-5" />,
+    icon: <Home className="md:size-5 size-4" />,
     label: "Inicio",
     href: "/home",
   },
   {
-    icon: <User className="size-5" />,
+    icon: <User className="md:size-5 size-4" />,
     label: "Perfil",
     href: "/profile",
   },
 ];
 export const SideBar = () => {
   const pathname = usePathname();
-  const isActive = (href: string) => pathname === href;
-
   return (
-    <aside className="sticky top-0 left-0 min-h-svh bg-stone-50 border-r border-r-stone-200 flex flex-col items-center py-4 gap-6 max-w-72 w-full">
+    <aside className="sticky top-0 left-0 border-x border-x-stone-200 flex flex-col items-center p-6 gap-2 max-w-64 w-full min-h-full">
       {options.map((option) => (
         <Button
           key={option.label}
           href={option.href}
           variant="menu"
-          className="flex items-center gap-2 md:text-base sm:text-sm text-xs font-semibold"
-          component="link"
-          disabled={isActive(option.href)}
+          pathname={pathname}
         >
           {option.icon}
           {option.label}

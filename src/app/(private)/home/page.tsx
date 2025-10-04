@@ -10,7 +10,7 @@ export default async function HomePage() {
     redirect("/");
   }
   return (
-    <div className="flex relative">
+    <div className="flex relative container mx-auto md:px-6 sm:px-5 px-4 min-h-svh">
       <SideBar />
       <main className="w-full md:py-32 sm:py-28 py-24">
         <section className="container mx-auto flex flex-col gap-4 px-4">

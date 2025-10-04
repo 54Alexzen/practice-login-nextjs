@@ -1,5 +1,6 @@
 import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
+import { Button } from "../ui/Button";
 
 interface LogoutButtonProps {
   type?: "text" | "icon" | "both";
@@ -11,9 +12,9 @@ export const LogoutButton = ({ type = "both" }: LogoutButtonProps) => {
   };
 
   return (
-    <button
+    <Button
       onClick={handleLogout}
-      className="flex items-center gap-2 hover:bg-stone-200 px-2.5 py-1.5 rounded-md transition-colors md:text-sm sm:text-xs text-2xs cursor-pointer"
+      variant="menu"
     >
       {type === "icon" && (
         <span>
@@ -29,6 +30,6 @@ export const LogoutButton = ({ type = "both" }: LogoutButtonProps) => {
           <span>Cerrar sesión</span>
         </>
       )}
-    </button>
+    </Button>
   );
 };

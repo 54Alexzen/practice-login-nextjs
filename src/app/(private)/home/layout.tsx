@@ -3,8 +3,6 @@ import { Poppins } from "next/font/google";
 import "@/app/globals.css";
 import { Toaster } from "sonner";
 import AuthProvider from "@/components/AuthProvider";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import NavbarApp from "@/components/layout/NavbarApp";
 
 const poppins = Poppins({
@@ -15,7 +13,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Frendly - Comparte el instante",
+  title: "Frendly",
   description:
     "Red social para compartir momentos con amigos y familiares de forma sencilla y divertida.",
   icons: {
@@ -33,14 +31,13 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${poppins.variable} ${poppins.className} antialiased text-stone-800 bg-stone-50`}
+        className={`${poppins.variable} ${poppins.className} antialiased text-stone-800`}
       >
         <AuthProvider>
           <NavbarApp />
           {children}
           <Toaster position="top-center" richColors />
         </AuthProvider>
-        <Footer />
       </body>
     </html>
   );
