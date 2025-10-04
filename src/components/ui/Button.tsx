@@ -16,7 +16,7 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   variant = "default",
   className = "",
-  href = "#",
+  href,
   pathname,
 }: ButtonProps) => {
   const isActive = pathname === href;
